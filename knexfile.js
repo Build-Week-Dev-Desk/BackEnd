@@ -32,7 +32,7 @@ const postgres = {
 
         production: {
           ...postgres,
-          connection: process.env.DB_URL,
+          connection: process.env.DB_URI,
           ssl: true
         }
 
