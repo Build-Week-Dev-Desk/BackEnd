@@ -28,6 +28,12 @@ const postgres = {
             password: process.env.DB_PASS,
             user: 'postgres'
           }
+        },
+
+        production: {
+          ...postgres,
+          connection: process.env.DB_URI,
+          ssl: true
         }
 
       };
