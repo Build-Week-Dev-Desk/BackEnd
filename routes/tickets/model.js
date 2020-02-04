@@ -1,5 +1,15 @@
 const db = require("../../config/dbConfig")
 
+module.exports = {
+    getTickets,
+    addNewTicket,
+    deleteTicket,
+    editTicket,
+    addSolutions,
+    getSolutions,
+    editSolutions,
+    deleteSolutions
+}
 
 function getTickets(id){
 
@@ -49,21 +59,26 @@ async function deleteTicket(id){
     return getTickets()
 }
 
+async function editTicket(id, newUpdate){
+    return await db("tickets").where("id", id).update(newUpdate)
+}
+
+
+
 async function addSolutions(solution){
-    await db("solutions").insert(solution)
-    return db("tickets").where("id", solutions.ticketId)
+    const [ exist ] = await db("solutions").where("ticketId", solution.ticketId)
+    if (exist){
+        return { message: `solution already exists`}
+    } else {
+        return await db("solutions").insert(solution)
+    }
 }
 
 async function editSolutions(id, solution){
-    await db("solutions").update(solution).where("ticketId", id)
-    return db("tickets").where("id", id)
+    return await db("solutions").where("ticketId", solution.ticketId).update(solution)
 }
 
-module.exports = {
-    getTickets,
-    addNewTicket,
-    deleteTicket,
-    addSolutions,
-    getSolutions,
-    editSolutions
+async function deleteSolutions(id){
+    return await db("solutions").where("ticketId", id).del()
 }
+

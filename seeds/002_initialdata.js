@@ -34,6 +34,22 @@ exports.seed = async function(knex) {
       attemptedSolutions: "Typed it in google, there were so many Reacts that came up",
       category: "React",
       asker: 1
+    },
+    {
+      title: "Submitting this ticket will fix the bug, right?",
+      status: "Open",
+      description: "I have bugs all over my house. I was told to submit a tickets",
+      attemptedSolutions: "I can't use insecticide because of my cats, and there were too many. What do I do?",
+      category: "Bugs",
+      asker: 1
+    },
+    {
+      title: "I need this fixed in 2 minutes. I have a presentation.",
+      status: "Open",
+      description: "Here's the catch, it's Redux",
+      attemptedSolutions: "Would turning my computer on and off again work?",
+      category: "Redux",
+      asker: 1
     }
   ])
 
