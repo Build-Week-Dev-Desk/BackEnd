@@ -32,7 +32,13 @@ const postgres = {
 
         production: {
           ...postgres,
-          connection: process.env.DB_URI,
+          connection: {
+            database: process.env.DATABASE,
+            host: process.env.HOST,
+            user: process.env.USER,
+            password: process.env.DB_PASSWORD,
+            port: process.env.PORT
+          },
           ssl: true
         }
 
