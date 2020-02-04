@@ -46,7 +46,8 @@ router.post("/login", validateLogin, async (req, res) => {
 
 function signToken(user) {
   const payload = {
-      role : user.role
+      role : user.role,
+      id: user.id
   }
   const options = {
       expiresIn: '1d'
