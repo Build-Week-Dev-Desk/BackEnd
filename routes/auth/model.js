@@ -5,7 +5,7 @@ const db = require("../../config/dbConfig")
 async function addUser(newUser) {
     newUser.password = await bcrypt.hash(newUser.password, 10)
     await db("users").insert(newUser)
-    const [ user ] = await db("users").where("username", newUser.username).select("userId", "name", "username", "usertypeId")
+    const [ user ] = await db("users").where("username", newUser.username).select("id", "name", "username", "roleId")
     return user
 }
 
@@ -15,8 +15,8 @@ function findById(id){
 
 async function findBy(key) {
     const [ user ] = await db("users")
-        .join("user_type", "users.usertypeId", "user_type.id")
-        .select("userId", "name", "username", "userType", "password")
+        .join("roles", "users.roleId", "roles.id")
+        .select("users.id", "name", "username", "role", "password")
         .where(key)
     return user
 }
