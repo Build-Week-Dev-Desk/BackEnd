@@ -9,10 +9,6 @@ async function addUser(newUser) {
     return user
 }
 
-function findById(id){
-    return db("users").where("userId", id).first("id","username")
-}
-
 async function findBy(key) {
     const [ user ] = await db("users")
         .join("roles", "users.roleId", "roles.id")
@@ -25,6 +21,5 @@ async function findBy(key) {
 
 module.exports = {
     addUser,
-    findById,
     findBy
 }
