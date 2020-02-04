@@ -12,39 +12,28 @@ exports.up = async function(knex) {
       tbl.string("email").notNullable()
       tbl.string("username").notNullable().unique()
       tbl.string("password").notNullable()
-      tbl.integer("roleId").notNullable().references("roleId").inTable("")
+      tbl.integer("roleId").notNullable().references("id").inTable("roles")
       tbl.timestamp("createdAt").defaultTo(knex.fn.now())
-  })
-
-  await knex.schema.createTable("ticketStatus", tbl => {
-    tbl.increments("id").notNullable()
-    tbl.string("status").notNullable().unique()
-  })
-
-  await knex.schema.createTable("ticketCategory", tbl => {
-    tbl.increments("id").notNullable()
-    tbl.string("category").notNullable().unique()
   })
 
 
   await knex.schema.createTable("tickets", tbl => {
     tbl.increments("id").notNullable()
     tbl.string("title").notNullable()
-    tbl.integer("statusId").notNullable().references("id").inTable("ticketStatus").defaultTo(1)
+    tbl.text("status").notNullable()
     tbl.text("description").notNullable()
-    tbl.text("attempt").notNullable()
-    tbl.integer("categoryId").notNullable().references("id").inTable("ticketCategory")
-    tbl.integer("askedBy").references("id").inTable("users")
-    tbl.integer("assignedTo").references("id").inTable("users")
+    tbl.text("attemptedSolutions").notNullable()
+    tbl.text("category").notNullable()
+    tbl.integer("asker").notNullable().references("id").inTable("users")
     tbl.timestamp("createdAt").defaultTo(knex.fn.now())
   })
 
-
   await knex.schema.createTable("solutions", tbl => {
     tbl.increments("id").notNullable()
-    tbl.text("solution").notNullable()
     tbl.integer("ticketId").references("id").inTable("tickets")
-    tbl.integer("solutionBy").references("id").inTable("users")
+    tbl.text("body").notNullable()
+    tbl.integer("answerer").references("id").inTable("users")
+    tbl.timestamp("createdAt").defaultTo(knex.fn.now())
   })
   
 }
@@ -52,8 +41,6 @@ exports.up = async function(knex) {
 exports.down = async function(knex) {
   await knex.schema.dropTableIfExists("solutions")
   await knex.schema.dropTableIfExists("tickets")
-  await knex.schema.dropTableIfExists("ticketStatus")
-  await knex.schema.dropTableIfExists("ticketCategory")
-  await knex.schema.dropTableIfExists("roles")
   await knex.schema.dropTableIfExists("users")
+  await knex.schema.dropTableIfExists("roles")
 };
