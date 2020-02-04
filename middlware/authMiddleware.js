@@ -14,7 +14,7 @@ function authenticate(req, res, next) {
             if(err) {
               res.status(401).json({ message: "LEAVE NOW AND NEVER COME BACK!!"})
             } else {
-              req.user = { userType: decodedToken.userType };
+              req.user = { role: decodedToken.role };
               next();
             }
           })
@@ -30,6 +30,8 @@ function validateLogin(req, res, next){
       res.status(400).json({ message: `Please make sure that USERNAME field is not empty` })
     } else if (!req.body.password){
       res.status(400).json({ message: `Please make sure that PASSWORD field is not empty` })
+    } else if (!req.body.roleId){
+      res.status(400).json({ message: `Please select ROLE` })
     } else {
       next()
     }
@@ -46,8 +48,8 @@ function validateRequest(req, res, next){
         res.status(400).json({ message: `Please make sure that EMAIL field is not empty` })
       } else if (!req.body.name){
         res.status(400).json({ message: `Please make sure that NAME field is not empty` })
-      } else if (!req.body.usertypeId){
-        res.status(400).json({ message: `Please select USERTYPE` })
+      } else if (!req.body.roleId){
+        res.status(400).json({ message: `Please select ROLE` })
       } else {
         next()
       }
