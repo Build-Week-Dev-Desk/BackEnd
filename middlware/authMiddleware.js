@@ -14,7 +14,7 @@ function authenticate(req, res, next) {
             if(err) {
               res.status(401).json({ message: "LEAVE NOW AND NEVER COME BACK!!"})
             } else {
-              req.user = { role: decodedToken.role };
+              req.user = { role: decodedToken.role, id: decodedToken.id };
               next();
             }
           })
@@ -53,4 +53,5 @@ function validateRequest(req, res, next){
       } else {
         next()
       }
-  }
+}
+
