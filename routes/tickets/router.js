@@ -45,11 +45,12 @@ router.delete("/:id", validateId, async (req,res) => {
     }
 })
 
-router.put("/:id", restricted("student"), validateId, validateTicketReq, async (req,res) => {
+router.put("/:id", restricted("staff"), validateId, async (req,res) => {
 
     try{
-        const newUpdate = { ...req.body, asker: req.user.id }
-        await db.editTicket(req.params.id, newUpdate)
+        const newStat = { ...req.body, assignee: req.user.name }
+        console.log(newStat)
+        await db.editTicketStatus(req.params.id, newStat)
         res.status(200).json(await db.getTickets(req.params.id))
     }
     catch(err){

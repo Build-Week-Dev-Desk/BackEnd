@@ -24,14 +24,13 @@ router.post("/register", validateRequest, async ( req, res) => {
 router.post("/login", validateLogin, async (req, res) => {
 
   try {
-        const { username, password } = req.body
-        const user = await db.findBy({ username })
-        console.log(user)
+        const { email, password } = req.body
+        const user = await db.findBy({ email })
         const passwordValid = await bcrypt.compareSync(password, user.password)
         
         if (user && passwordValid){
             const token = signToken(user)
-            res.status(200).json( {token,  message: `Welcome ${user.name}`, username: user.username, role: user.role })
+            res.status(200).json( {token,  message: `Welcome ${user.name}`, name: user.name, role: user.role })
         } else {
             res.status(401).json({ message: "INVALID CREDENTIALS, please try again" });
         }
@@ -47,7 +46,8 @@ router.post("/login", validateLogin, async (req, res) => {
 function signToken(user) {
   const payload = {
       role : user.role,
-      id: user.id
+      id: user.id,
+      name: user.name
   }
   const options = {
       expiresIn: '1d'

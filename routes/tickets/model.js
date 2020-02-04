@@ -4,7 +4,7 @@ module.exports = {
     getTickets,
     addNewTicket,
     deleteTicket,
-    editTicket,
+    editTicketStatus,
     addSolutions,
     getSolutions,
     editSolutions,
@@ -20,8 +20,10 @@ function getTickets(id){
             "description", 
             "attemptedSolutions", 
             "category", 
-            "name as asker", 
-            "tickets.createdAt")
+            "name as asker",
+            "assignee", 
+            "tickets.createdAt",
+            "solution")
 
     if (id) {
         tickets.where("tickets.id", id).first()
@@ -59,7 +61,7 @@ async function deleteTicket(id){
     return getTickets()
 }
 
-async function editTicket(id, newUpdate){
+async function editTicketStatus(id, newUpdate){
     return await db("tickets").where("id", id).update(newUpdate)
 }
 

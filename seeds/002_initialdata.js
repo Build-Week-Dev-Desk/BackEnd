@@ -3,14 +3,12 @@ exports.seed = async function(knex) {
 
   await knex("users").insert([
     {
-      username: "student0",
       password: "000000",
       email: "student0@thisschooltho.com",
       name: "Student Zero",
       roleId: 1
     },
     {
-      username: "Helper0",
       password: "000000",
       email: "helper0@thisschooltho.com",
       name: "Helper Zero",
@@ -25,7 +23,9 @@ exports.seed = async function(knex) {
       description: "Can somebody please answer my questions?",
       attemptedSolutions: "I opened a Word Document and started typing and nothing happened",
       category: "HTML",
-      asker: 1
+      asker: 1,
+      assignee: null,
+      solution: null
     },
     {
       title: "What is React?",
@@ -33,7 +33,9 @@ exports.seed = async function(knex) {
       description: "Is it the same as reaction??",
       attemptedSolutions: "Typed it in google, there were so many Reacts that came up",
       category: "React",
-      asker: 1
+      asker: 1,
+      assignee: null,
+      solution: null
     },
     {
       title: "Submitting this ticket will fix the bug, right?",
@@ -41,7 +43,9 @@ exports.seed = async function(knex) {
       description: "I have bugs all over my house. I was told to submit a tickets",
       attemptedSolutions: "I can't use insecticide because of my cats, and there were too many. What do I do?",
       category: "Bugs",
-      asker: 1
+      asker: 1,
+      assignee: null,
+      solution: null
     },
     {
       title: "I need this fixed in 2 minutes. I have a presentation.",
