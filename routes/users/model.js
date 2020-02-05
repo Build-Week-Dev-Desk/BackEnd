@@ -1,5 +1,6 @@
 const db = require("../../config/dbConfig")
 
+
 async function getUsers(){
     return db("users")
 }
