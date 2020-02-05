@@ -8,7 +8,7 @@ const { authenticate } = require("../middlware/authMiddleware")
 const authRouter = require("../routes/auth/router")
 const usersRouter = require("../routes/users/router")
 const ticketsRouter = require("../routes/tickets/router")
-
+const myTicketsRouter = require("../routes/mytickets/router")
 
 configMiddleware(server)
 
@@ -20,5 +20,6 @@ server.get("/", (req,res)=> {
 server.use("/api/auth", authRouter)
 server.use("/api/users", authenticate, usersRouter)
 server.use("/api/tickets", authenticate, ticketsRouter)
+server.use("/api/mytickets", authenticate, myTicketsRouter)
 
 module.exports = server

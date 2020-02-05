@@ -1,20 +1,6 @@
 
 exports.seed = async function(knex) {
 
-  await knex("users").insert([
-    {
-      password: "000000",
-      email: "student0@thisschooltho.com",
-      name: "Student Zero",
-      roleId: 1
-    },
-    {
-      password: "000000",
-      email: "helper0@thisschooltho.com",
-      name: "Helper Zero",
-      roleId: 2
-    }
-  ]);
 
   await knex("tickets").insert([
     {

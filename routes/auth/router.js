@@ -24,11 +24,11 @@ router.post("/register", validateRequest, async ( req, res) => {
 router.post("/login", validateLogin, async (req, res) => {
 
   try {
-        const { email, password, roleId } = req.body
+        const { email, password, role } = req.body
         const user = await db.findBy({ email })
         const passwordValid = await bcrypt.compareSync(password, user.password)
-        if (roleId !== user.roleId){
-          res.status(400).json({ message: `Role ID does not match the system`})
+        if (role !== user.role){
+          res.status(400).json({ message: `ROLE input does not match the system`})
         } else {
         if (user && passwordValid){
             const token = signToken(user)

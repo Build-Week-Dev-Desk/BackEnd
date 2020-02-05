@@ -1,18 +1,13 @@
 
 exports.up = async function(knex) {
-  
-  await knex.schema.createTable("roles", tbl => {
-    tbl.increments("id").notNullable()
-    tbl.string("role").notNullable().unique()
-  })
 
   await knex.schema.createTable("users", tbl => {
       tbl.increments("id").notNullable()
       tbl.string("name").notNullable()
       tbl.string("email").notNullable().unique()
       tbl.string("password").notNullable()
-      tbl.integer("roleId").notNullable().references("id").inTable("roles")
-      tbl.timestamp("createdAt").defaultTo(knex.fn.now())
+      tbl.string("role").notNullable()
+      tbl.time("createdAt").defaultTo(knex.fn.now())
   })
 
 
@@ -24,9 +19,9 @@ exports.up = async function(knex) {
     tbl.text("attemptedSolutions").notNullable()
     tbl.text("category").notNullable()
     tbl.integer("asker").notNullable().references("id").inTable("users")
-    tbl.timestamp("createdAt").defaultTo(knex.fn.now())
-    tbl.text("assignee").nullable().defaultTo("null")
-    tbl.text("solution").nullable().defaultTo("null")
+    tbl.time("createdAt").defaultTo(knex.fn.now())
+    tbl.integer("assignee").nullable().references("id").inTable("users")
+    tbl.text("solution").nullable().defaultTo(null)
   })
 
   await knex.schema.createTable("solutions", tbl => {
@@ -34,7 +29,7 @@ exports.up = async function(knex) {
     tbl.integer("ticketId").references("id").inTable("tickets")
     tbl.text("body").notNullable()
     tbl.integer("answerer").references("id").inTable("users")
-    tbl.timestamp("createdAt").defaultTo(knex.fn.now())
+    tbl.time("createdAt").defaultTo(knex.fn.now())
   })
   
 }
@@ -43,5 +38,4 @@ exports.down = async function(knex) {
   await knex.schema.dropTableIfExists("solutions")
   await knex.schema.dropTableIfExists("tickets")
   await knex.schema.dropTableIfExists("users")
-  await knex.schema.dropTableIfExists("roles")
 };

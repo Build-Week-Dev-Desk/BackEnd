@@ -31,8 +31,8 @@ function validateLogin(req, res, next){
       res.status(400).json({ message: `Please make sure that EMAIL field is not empty` })
     } else if (!req.body.password){
       res.status(400).json({ message: `Please make sure that PASSWORD field is not empty` })
-    } else if (!req.body.roleId){
-      res.status(400).json({ message: `Please make sure that PASSWORD field is not empty` })
+    } else if (!req.body.role){
+      res.status(400).json({ message: `Please select your ROLE before your proceed` })
     } else {
       next()
     }
@@ -45,8 +45,8 @@ function validateRequest(req, res, next){
       res.status(400).json({ message: `Please make sure that EMAIL field is not empty` })
     }else if (!req.body.name){
       res.status(400).json({ message: `Please make sure that NAME field is not empty` })
-    }else if (!req.body.roleId){
-      res.status(400).json({ message: `Please select ROLE` })
+    }else if (!req.body.role){
+      res.status(400).json({ message: `Please select your ROLE before your proceed` })
     } else {
       next()
     }

@@ -13,15 +13,15 @@ module.exports = {
 
 function getTickets(id){
 
-    let tickets = db("tickets").join("users", "tickets.asker", "users.id")
+    let tickets = db("tickets").leftJoin("users as u1", "tickets.asker", "u1.id").leftJoin("users as u2", "tickets.assignee", "u2.id")
     .select("tickets.id", 
             "title", 
             "status", 
             "description", 
             "attemptedSolutions", 
             "category", 
-            "name as asker",
-            "assignee", 
+            "u1.name as asker",
+            "u2.name as assignee", 
             "tickets.createdAt",
             "solution")
 
