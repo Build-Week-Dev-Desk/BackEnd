@@ -1,18 +1,26 @@
 module.exports = {
-    restricted,
+    checkStudent,
+    checkStaff,
     validateTicketReq,
     validateSolutionReq
 }
 
-function restricted(role){
-    return function(req, res, next) {
-      if(req.user && req.user.role && req.user.role.toLowerCase() === role) {
-        next();
-      } else {
-        res.status(403).json({ message: `PERMISSION DENIED` })    
-      }
-    }
+function checkStudent(req, res, next){
+  if(req.user && req.user.role && ((req.user.role.toLowerCase() === 'both') || (req.user.role.toLowerCase() === 'student')) ) {
+    next();
+  } else {
+    res.status(403).json({ message: `PERMISSION DENIED` })    
   }
+}
+
+
+function checkStaff(req, res, next){
+  if(req.user && req.user.role && ((req.user.role.toLowerCase() === 'both') || (req.user.role.toLowerCase() === 'staff')) ) {
+    next();
+  } else {
+    res.status(403).json({ message: `PERMISSION DENIED` })    
+  }
+}
 
 
   function validateTicketReq(req, res, next){

@@ -42,14 +42,14 @@
 
             <section id="auth">
                 <h3 class="text-primary">API/AUTH</h3>
-                <h4 class="text-secondary">api/auth/register</h4>
+                <h4 class="text-secondary"><span class="badge badge-info mr-3">POST</span>api/auth/register</h4>
                 <div class="bg-dark text-white p-3 m-3">
+
                     <h5 class="text-warning">REQUEST</h5>
                     {<br />
-                    "username": "studentnumberone", <br />
-                    "password": "thisispassword", <br>
                     "name": "Student One",<br />
                     "email": "student1@awesomeschool.com",<br />
+                    "password": "thisispassword", <br>
                     "roleId": 1<br />
                     }
                     <h5 class="text-warning">RESPONSE</h5>
@@ -60,11 +60,11 @@
                     "roleId": 1<br />
                     }
                 </div>
-                <h4 class="text-secondary">api/auth/login</h4>
+                <h4 class="text-secondary"><span class="badge badge-info mr-3">POST</span>api/auth/login</h4>
                 <div class="bg-dark text-white p-3 m-3">
                     <h5 class="text-warning">REQUEST</h5>
                     {<br />
-                    "username": "studentnumberone", <br />
+                    "email": "student1@awesomeschool.com", <br />
                     "password": "thisispassword", <br>
                     "roleId": 1<br />
                     }
@@ -91,7 +91,7 @@
             <section id="tickets">
                 <h3 class="text-primary">API/TICKETS</h3>
                 <h4 class="text-secondary">api/tickets</h4>
-                <h5 class="text-info">GET api/tickets</h5>
+                <h4 class="text-info"><span class="badge badge-warning mr-3">GET</span> api/tickets</h4>
                 <ul>
                     <li>Return a list of tickets</li>
                     <li>Can be accessed by both students and staff</li>
@@ -122,7 +122,7 @@
                     <br /> }
                     <br /> ]
                 </div>
-                <h5 class="text-info">POST api/tickets</h5>
+                <h4 class="text-info"><span class="badge badge-info mr-3">POST</span> api/tickets</h4>
                 <ul>
                     <li>Create a new ticket</li>
                     <li>Can only be created by STUDENTS</li>
@@ -149,8 +149,8 @@
                     <br /> "title": "I need this fixed in 5 minutes"
                     <br /> }
                 </div>
-                <h4 class="text-secondary">api/tickets/:id</h4>
-                <h5 class="text-info">GET api/tickets/:id</h5>
+                <h3 class="text-secondary">api/tickets/:id</h3>
+                <h4 class="text-info"><span class="badge badge-warning mr-3">GET</span> api/tickets/:id</h4>
                 <ul>
                     <li>Return an object with data according tied to requested</li>
                     <li>Can be accessed by both students and staff</li>
@@ -175,7 +175,7 @@
                     <br /> }
                     <br /> }<br />
                 </div>
-                <h5 class="text-info">DELETE api/tickets/:id</h5>
+                <h4 class="text-info"><span class="badge badge-danger mr-3">DELETE</span> api/tickets/:id</h4>
                 <ul>
                     <li>Take id as a param</li>
                     <li>No need to make a request</li>
@@ -206,25 +206,25 @@
                     <br /> "createdAt": "2020-02-04T13:50:52.478Z"
                     <br /> }
                     <br /> ]</div>
-                <h5 class="text-info">PUT api/tickets/:id</h5>
+                <h4 class="text-info"><span class="badge badge-primary mr-3">PUT</span> api/tickets/:id</h5>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
                 <h4 class="text-secondary">api/tickets/:id/solutions</h4>
-                <h5 class="text-info">GET api/tickets/:id/solutions</h5>
+                <h4 class="text-info"><span class="badge badge-warning mr-3">GET</span> api/tickets/:id/solutions</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
-                <h5 class="text-info">POST api/tickets/:id/solutions</h5>
+                <h4 class="text-info"><span class="badge badge-info mr-3">POST</span> api/tickets/:id/solutions</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
-                <h5 class="text-info">PUT api/tickets/:id/solutions</h5>
+                <h4 class="text-info"><span class="badge badge-primary mr-3">PUT</span> api/tickets/:id/solutions</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
-                <h5 class="text-info">DELETE api/tickets/:id/solutions</h5>
+                <h4 class="text-info"><span class="badge badge-danger mr-3">DELETE</span> api/tickets/:id/solutions</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
             </section>
 
             <section id="users">
                 <h3 class="text-primary">API/USERS</h3>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
-                <h4 class="text-secondary">api/users</h4>
+                <h4 class="text-secondary"><span class="badge badge-warning mr-3">GET</span>api/users</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
-                <h4 class="text-secondary">api/users/:id</h4>
+                <h4 class="text-secondary"><span class="badge badge-warning mr-3">GET</span>api/users/:id</h4>
                 <div class="bg-dark text-warning p-3 m-3"> this should be example</div>
             </section>
         </div>

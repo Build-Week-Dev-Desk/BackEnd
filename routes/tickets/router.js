@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const db = require("./model")
-const { restricted, validateSolutionReq, validateTicketReq } = require("../../middlware/ticketMiddleware")
+const { validateSolutionReq, validateTicketReq, checkStudent, checkStaff } = require("../../middlware/ticketMiddleware")
 
 
 router.get("/", async (req,res) => {
@@ -24,7 +24,7 @@ router.get("/:id", validateId, async (req,res) => {
     }
 })
 
-router.post("/", restricted("student"), validateTicketReq, async (req,res) => {
+router.post("/", checkStudent, validateTicketReq, async (req,res) => {
     
     try{
         const newTicket = { ...req.body, asker: req.user.id }
@@ -45,7 +45,7 @@ router.delete("/:id", validateId, async (req,res) => {
     }
 })
 
-router.put("/:id", restricted("staff"), validateId, async (req,res) => {
+router.put("/:id", checkStaff, validateId, async (req,res) => {
 
     try{
         const newStat = { ...req.body, assignee: req.user.name }
@@ -60,7 +60,7 @@ router.put("/:id", restricted("staff"), validateId, async (req,res) => {
 
 
 
-router.post("/:id/solutions", restricted("staff"), validateId, validateSolutionReq, async (req,res) => {
+router.post("/:id/solutions", checkStaff, validateId, validateSolutionReq, async (req,res) => {
     
     try{
         const solution = { ...req.body, answerer: req.user.id, ticketId: req.params.id}
@@ -73,7 +73,7 @@ router.post("/:id/solutions", restricted("staff"), validateId, validateSolutionR
 
 })
 
-router.put("/:id/solutions", restricted("staff"), validateId, validateSolutionReq, async (req,res) => {
+router.put("/:id/solutions", checkStaff, validateId, validateSolutionReq, async (req,res) => {
     
     try{
         const solution = { ...req.body, answerer: req.user.id, ticketId: req.params.id}
@@ -85,7 +85,7 @@ router.put("/:id/solutions", restricted("staff"), validateId, validateSolutionRe
     }                                 
 })
 
-router.delete("/:id/solutions", restricted("staff"), validateId, async (req,res) => {
+router.delete("/:id/solutions", checkStaff, validateId, async (req,res) => {
     try{
         await db.deleteSolutions(req.params.id)
         res.status(200).json(await db.getTickets(req.params.id))
