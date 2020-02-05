@@ -26,21 +26,26 @@ function getTickets(id){
             "solution")
 
     if (id) {
-        tickets.where("tickets.id", id).first()
-
-        const promises = [tickets, this.getSolutions(id)]
-        return Promise.all(promises).then(results => {
-            let [ticket, solution] = results
-
-            if (ticket){
-                ticket.solution = solution[0]
-                return ticket
-            } else {
-                return null
-            }
+        return tickets.where("tickets.id", id).first().then(ticket => {
+            return getSolutions(id).then( solutions => {
+                return {
+                    ...ticket,
+                    solution: solutions[0]
+                }
+            })
         })
+        
     } else {
-        return tickets
+        return tickets.then(ticks => {
+            const proms = ticks.map(tick =>{
+                return getSolutions(tick.id).then(solutions => {
+                    return {
+                        ...tick,
+                        solution: solutions[0]
+                    }
+                })})
+             return Promise.all(proms)
+        })
     }
 }
 

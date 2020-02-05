@@ -6,7 +6,6 @@ const { validateSolutionReq, validateTicketReq, checkStudent, checkStaff } = req
 
 router.get("/", async (req,res) => {
     let tickets = await db.getTickets()
-    console.log(tickets)
     try{
         res.status(200).json(tickets)
     }
