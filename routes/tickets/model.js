@@ -57,6 +57,10 @@ async function addNewTicket(newTicket){
 }
 
 async function deleteTicket(id){
+    const solution = await db("solutions").where("ticketId", id)
+    if (solution) {
+        await db("solutions").where("ticketId", id).del()
+    }
     await db("tickets").where("id", id).del()
     return getTickets()
 }
