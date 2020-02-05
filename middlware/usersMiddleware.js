@@ -16,7 +16,7 @@ function validateRequest(req, res, next){
  }
  
 function checkId(req, res, next){
-    if(req.user && req.user.id && req.user.id === req.params.id){
+    if(req.user && req.user.id && req.user.id === parseInt(req.params.id)){
       next();
     } else {
       res.status(403).json({ message: `PERMISSION DENIED` })    

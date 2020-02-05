@@ -24,6 +24,7 @@ router.get("/:id", checkId, async (req,res) => {
 
 router.put("/:id", checkId, validateRequest, async (req,res) => {
     try{
+        
         await db.editUser(req.params.id, req.body)
         res.status(200).json(await db.getUserById(req.params.id))
     }
