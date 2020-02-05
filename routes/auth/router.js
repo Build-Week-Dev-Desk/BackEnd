@@ -32,7 +32,7 @@ router.post("/login", validateLogin, async (req, res) => {
         } else {
         if (user && passwordValid){
             const token = signToken(user)
-            res.status(200).json( {token,  message: `Welcome ${user.name}`, name: user.name, role: user.role })
+            res.status(200).json( {token,  message: `Welcome ${user.name}`, id: user.id, name: user.name, role: user.role })
         } else {
             res.status(401).json({ message: "INVALID CREDENTIALS, please try again" });
         }
