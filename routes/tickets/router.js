@@ -37,7 +37,7 @@ router.post("/", checkStudent, validateTicketReq, async (req,res) => {
 })
 
 
-router.delete("/:id", validateId, async (req,res) => {
+router.delete("/:id", checkStaff, validateId, async (req,res) => {
     try{
         const result = await db.deleteTicket(req.params.id)
         res.status(200).json(result)
