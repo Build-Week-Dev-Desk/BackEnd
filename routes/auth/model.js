@@ -12,7 +12,7 @@ async function addUser(newUser) {
 async function findBy(key) {
     const [ user ] = await db("users")
         .join("roles", "users.roleId", "roles.id")
-        .select("users.id", "name", "email", "role", "password")
+        .select("users.id", "name", "email", "roleId", "role", "password")
         .where(key)
 
     return user

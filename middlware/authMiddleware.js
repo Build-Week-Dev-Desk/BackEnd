@@ -31,6 +31,8 @@ function validateLogin(req, res, next){
       res.status(400).json({ message: `Please make sure that EMAIL field is not empty` })
     } else if (!req.body.password){
       res.status(400).json({ message: `Please make sure that PASSWORD field is not empty` })
+    } else if (!req.body.roleId){
+      res.status(400).json({ message: `Please make sure that PASSWORD field is not empty` })
     } else {
       next()
     }
