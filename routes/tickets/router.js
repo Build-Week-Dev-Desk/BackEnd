@@ -6,7 +6,6 @@ const { validateSolutionReq, validateTicketReq, checkStudent, checkStaff } = req
 
 router.get("/", async (req,res) => {
     let tickets = await db.getTickets()
-    console.log(tickets)
     try{
         res.status(200).json(tickets)
     }
@@ -37,9 +36,10 @@ router.post("/", checkStudent, validateTicketReq, async (req,res) => {
 })
 
 
-router.delete("/:id", validateId, async (req,res) => {
+router.delete("/:id", checkStaff, validateId, async (req,res) => {
     try{
-        res.status(200).json(await db.deleteTicket(req.params.id))
+        const result = await db.deleteTicket(req.params.id)
+        res.status(200).json(result)
     }
     catch(err){
         res.status(500).json({ errorMessage: err })
