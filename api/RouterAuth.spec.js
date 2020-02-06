@@ -3,49 +3,42 @@ const db = require("../config/dbConfig")
 const server = require("./server")
 
 //TEST REGISTER
-describe("POST/ register endpoint", ()=> {
+describe("TEST REGISTER", ()=> {
 
-    beforeEach(async () => {
-        await db("users").truncate()
-    })
+    // test("POST /REGISTER should work", async()=> {
 
-    test("POST /REGISTER should work", async()=> {
+    //     const newUser = { email: "alpharomeo@schooladmin.com", password: "123456789", role: "both", name: "Alpha Romeo "}
+    //     const res = await supertest(server).post("/api/auth/register").send(newUser)
+    //     expect(res.status).toBe(201)
+    // })
 
-        const newUser = { email: "alpharomeo@schooladmin.com", password: "123456789", role: "both", name: "Alpha Romeo "}
-        const res = await supertest(server).post("/api/auth/register").send(newUser)
-        expect(res.status).toBe(201)
-        expect(res.body.username).toBe(newUser.username)
-    })
 
-    test("POST /REGISTER should NOT work", async()=> {
+    test("REGISTER enpoints should NOT work with bad request", async()=> {
         const newUser = { email: "alpharomeo@schooladmin.com" }
         const res = await supertest(server).post("/api/auth/register").send(newUser)
         expect(res.status).toBe(400)
+        expect(res.body.message).toMatch(/please make sure/i)
     })
     
 })
 
 //TEST LOGIN
-describe("POST/ login endpoint", ()=> {
+describe("TEST LOGIN endpoint", ()=> {
     
-    beforeEach(async () => {
-        await db('users').truncate();
-    })
+    test("LOGIN should work and returns correct response", async()=> {
 
-    test("POST/ login should work", async()=> {
-
-        const newUser = { email: "alpharomeo@schooladmin.com", password: "123456789", role: "both" }
-        await supertest(server).post("/api/auth/register").send(newUser)
-        const res = await supertest(server).post("/api/auth/login").send(newUser)
+        const res = await supertest(server)
+                    .post("/api/auth/login")
+                    .send({ email: "alpharomeo@schooladmin.com", password: "123456789", role: "both", name: "Alpha Romeo "} )
         expect(res.status).toBe(200)
-        expect(res.body.message).toMatch(/welcom/i)
+        expect(res.body.id).toBe(1)
+        expect(res.body.message).toMatch(/welcome/i)
     })
 
-    test("POST/ login should NOT work with wrong request", async()=> {
+    test("LOGIN endpoint should NOT work with wrong request", async()=> {
 
-        const newUser = { username: "panamacitybeach", password: "12345678" }
-        await supertest(server).post("/api/auth/register").send(newUser)
         const res = await supertest(server).post("/api/auth/login").send({ username: "panamacity" })
         expect(res.status).toBe(400)
+        expect(res.body.message).toMatch(/please make sure/i)
     })
 })

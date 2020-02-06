@@ -18,17 +18,17 @@ exports.up = async function(knex) {
     tbl.text("description").notNullable()
     tbl.text("attemptedSolutions").notNullable()
     tbl.text("category").notNullable()
-    tbl.integer("asker").notNullable().references("id").inTable("users")
+    tbl.integer("asker").notNullable().references("id").inTable("users").onDelete('CASCADE')
     tbl.time("createdAt").defaultTo(knex.fn.now())
-    tbl.integer("assignee").nullable().references("id").inTable("users")
+    tbl.integer("assignee").nullable().references("id").inTable("users").onDelete('CASCADE')
     tbl.text("solution").nullable().defaultTo(null)
   })
 
   await knex.schema.createTable("solutions", tbl => {
     tbl.increments("id").notNullable()
-    tbl.integer("ticketId").references("id").inTable("tickets")
+    tbl.integer("ticketId").references("id").inTable("tickets").onDelete('CASCADE')
     tbl.text("body").notNullable()
-    tbl.integer("answerer").references("id").inTable("users")
+    tbl.integer("answerer").references("id").inTable("users").onDelete('CASCADE')
     tbl.time("createdAt").defaultTo(knex.fn.now())
   })
   
