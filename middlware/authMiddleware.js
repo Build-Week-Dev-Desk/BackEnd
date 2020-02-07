@@ -12,14 +12,14 @@ function authenticate(req, res, next) {
     if (token) {
         jwt.verify(token, jwtSecret, (err, decodedToken) => {
             if(err) {
-              res.status(401).json({ message: "LEAVE NOW AND NEVER COME BACK!!"})
+              res.status(403).json({ message: "LEAVE NOW AND NEVER COME BACK!!"})
             } else {
               req.user = { role: decodedToken.role, id: decodedToken.id, name: decodedToken.name };
               next();
             }
           })
         } else {
-          res.status(401).json({ message: 'This is a restricted area, may I please ask you politely to not proceed?' })
+          res.status(403).json({ message: 'This is a restricted area, may I please ask you politely to not proceed?' })
         }
 }
 
