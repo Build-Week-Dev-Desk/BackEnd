@@ -29,6 +29,11 @@ DevDesk Que Backend consists of three types of users:
 - **staff** - can claim a ticket, edit a solution to a ticket
 - **both** - can access and edit all resources
 
+Each users are assigned a JWT token upon login. The JWT token determines which URI a user can access.
+
+The user attempted to access the path that they are not allowed will receive unauthorized message in their response.
+
+
 <br />
 
 ## Database Schema
