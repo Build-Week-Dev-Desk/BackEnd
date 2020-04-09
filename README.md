@@ -1,7 +1,7 @@
 
 # DevDesk Queue API Documentation
 
-#### Backend deployed at [heroku](https://bwdevdesk.herokuapp.com/) <br>
+#### Backend deployed at herokug https://bwdevdesk.herokuapp.com](https://bwdevdesk.herokuapp.com/) <br>
 #### Postman Documentation: https://documenter.getpostman.com/view/9969236/SWTEdx1A?version=latest
 #### Deploy Site: https://dev-desk.now.sh/
 --------------
